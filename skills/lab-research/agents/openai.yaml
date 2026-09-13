@@ -1,0 +1,4 @@
+interface:
+  display_name: "课题组科研助手"
+  short_description: "面向雷达、相控阵天线与SAR，解读论文并辅助研究思路和国自然写作"
+  default_prompt: "请使用 $lab-research 解读我提供的论文或研究材料，梳理核心证据，并帮助改进研究思路或申请书。"
