@@ -1,0 +1,24 @@
+{
+  "schema_version": "lab-research-profile-v1",
+  "research_focus": [
+    "radar",
+    "phased-array antenna",
+    "SAR imagery",
+    "small target detection"
+  ],
+  "confirmed_capabilities": [],
+  "available_resources": {
+    "datasets": [],
+    "software": [],
+    "hardware": [],
+    "measurement_facilities": []
+  },
+  "constraints": [],
+  "unknowns": [
+    "可用于新实验的数据集及授权范围",
+    "可复用代码和训练环境",
+    "GPU 型号与可用时长",
+    "雷达或天线测量条件"
+  ],
+  "sources": []
+}

@@ -1,6 +1,6 @@
 # 开源来源与许可
 
-本技能 v0.1.0 对下列 MIT 许可项目的科研工作流进行了选取、中文改编和重组。不是原作者发布的版本，也不代表原作者认可本项目。检索与取样日期：2026-09-13。
+本技能 v0.2.0 对下列 MIT 许可项目的科研工作流进行了选取、中文改编和重组。不是原作者发布的版本，也不代表原作者认可本项目。检索与取样日期：2026-09-13；多 Agent 设计更新日期：2026-09-16。
 
 ## 改编来源
 
@@ -12,7 +12,9 @@
 
 `scripts/read_pdf.py` 和测试是本项目新写的实现，未复制上述项目代码。其运行依赖 pdfplumber 单独按自身许可分发；本技能包不捆绑该库。
 
-research-hound、Docling、MATLAB toolkit 等出现在调研文档中；v0.1 未复制其文件，也未将其设为运行依赖。
+research-hound、Docling、MATLAB toolkit 等出现在调研文档中；本项目未复制其文件，也未将其设为运行依赖。
+
+v0.2 调研了 [tuo3288/PaperReading 固定快照](https://github.com/tuo3288/PaperReading/tree/030c74b2d7b4ef897787fb65ef322464d73e8f7a) 的角色分工、问题预算和检查点思路。该快照没有 LICENSE 文件，README 中的许可名称也没有附条款，因此本项目没有复制其代码、提示词或配置；`references/multi-agent-reading.md`、交接协议和校验器均为重新设计与实现。
 
 ## 上游版权声明
 
