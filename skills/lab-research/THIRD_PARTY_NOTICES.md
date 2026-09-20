@@ -1,6 +1,6 @@
 # 开源来源与许可
 
-本技能 v0.2.0 对下列 MIT 许可项目的科研工作流进行了选取、中文改编和重组。不是原作者发布的版本，也不代表原作者认可本项目。检索与取样日期：2026-09-13；多 Agent 设计更新日期：2026-09-16。
+本技能 v0.3.0 对下列 MIT 许可项目的科研工作流进行了选取、中文改编和重组。不是原作者发布的版本，也不代表原作者认可本项目。检索与取样日期：2026-09-13；多 Agent 设计更新日期：2026-09-16；材料写作更新日期：2026-09-20。
 
 ## 改编来源
 
@@ -9,8 +9,9 @@
 | [ChineseResearchLaTeX](https://github.com/huangwb8/ChineseResearchLaTeX/tree/117b95fc0a19d797f22a2f7d0b4e882f04979108) | `skills/research-literature-interpretation/SKILL.md`；`skills/nsfc-justification-writer/SKILL.md`；`skills/nsfc-research-content-writer/SKILL.md`；`skills/nsfc-ref-alignment/SKILL.md` | 将问题、方法、证据、边界与申请书论证检查改编为本组参考文件；取消固定 LaTeX 路径、固定三年计划和专用运行框架依赖 |
 | [K-Dense Scientific Agent Skills](https://github.com/K-Dense-AI/scientific-agent-skills/tree/c1ed16d97dd61ff50a3bd46dd353e4a55fd77f34) | `skills/research-grants/SKILL.md`；`skills/scientific-critical-thinking/SKILL.md`；`skills/hypothesis-generation/SKILL.md` | 保留研究目标、方法、验证和可行性的一致性思路；重写为本组申请场景，区分假设、竞争解释和证据；未引入其 PDF/DOCX 等特殊许可目录 |
 | [BESSER-PEARL research-agent-skills](https://github.com/BESSER-PEARL/research-agent-skills/tree/03d3c49ac1698c9d29cc4c0f5e8eeca17210bd51) | `research-paper-review/SKILL.md` | 改编按论文类型调整评价标准、核对数值与提出可执行反馈的流程；增加雷达/SAR 口径，取消固定十条建议与接收/拒稿结论 |
+| [nature-skills](https://github.com/Yuan1z0825/nature-skills/tree/f437a86da68e77126a7e0bd0488bf2ea11ac13fb) | `skills/nature-academic-search/SKILL.md` 及检索策略；`skills/nature-writing/SKILL.md` 及论证结构参考 | 改编来源分层、查询矩阵、去重和证据优先写作；重写为雷达/SAR、国自然与科研材料场景，不绑定其 MCP 服务或复制其脚本 |
 
-`scripts/read_pdf.py` 和测试是本项目新写的实现，未复制上述项目代码。其运行依赖 pdfplumber 单独按自身许可分发；本技能包不捆绑该库。
+`scripts/read_pdf.py`、`scripts/build_research_docx.py` 和测试是本项目新写的实现，未复制上述项目代码。其运行依赖 pdfplumber 和 python-docx，二者按自身许可单独分发；本技能包不捆绑这些库。
 
 research-hound、Docling、MATLAB toolkit 等出现在调研文档中；本项目未复制其文件，也未将其设为运行依赖。
 
@@ -23,6 +24,7 @@ v0.2 调研了 [tuo3288/PaperReading 固定快照](https://github.com/tuo3288/Pa
 - ChineseResearchLaTeX：Copyright © 2024 Weibin Huang。原文见 [license.txt](https://github.com/huangwb8/ChineseResearchLaTeX/blob/117b95fc0a19d797f22a2f7d0b4e882f04979108/license.txt)。
 - K-Dense：Copyright (c) 2025 K-Dense Inc.。原文见 [LICENSE.md](https://github.com/K-Dense-AI/scientific-agent-skills/blob/c1ed16d97dd61ff50a3bd46dd353e4a55fd77f34/LICENSE.md)。
 - BESSER-PEARL：Copyright (c) 2026 BESSER-PEARL。原文见 [LICENSE](https://github.com/BESSER-PEARL/research-agent-skills/blob/03d3c49ac1698c9d29cc4c0f5e8eeca17210bd51/LICENSE)。
+- nature-skills：Copyright (c) 2026 Yuan Yizhe。原文见 [LICENSE](https://github.com/Yuan1z0825/nature-skills/blob/f437a86da68e77126a7e0bd0488bf2ea11ac13fb/LICENSE)。
 
 上述改编部分均适用以下 MIT 许可正文。再分发本技能时保留本文件及许可。
 

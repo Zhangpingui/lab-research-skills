@@ -1,0 +1,41 @@
+{
+  "schema_version": "lab-research-document-v1",
+  "title": "雷达与 SAR 科研项目材料示例",
+  "subtitle": "结构演示，不包含真实项目结论",
+  "document_type": "research_proposal",
+  "language": "zh-CN",
+  "sections": [
+    {
+      "heading": "立项依据",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "实际使用时，应从经过核验的课题组事实和文献证据起草本节。"
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "说明具体研究对象与场景",
+            "定位可核验的认识缺口",
+            "给出拟回答的问题和适用边界"
+          ]
+        }
+      ]
+    },
+    {
+      "heading": "研究内容与验证",
+      "level": 1,
+      "blocks": [
+        {
+          "type": "table",
+          "headers": ["研究内容", "关键变量", "验证依据"],
+          "rows": [
+            ["内容示例", "待由真实研究设想确定", "待由实验或文献证据确定"]
+          ]
+        }
+      ]
+    }
+  ],
+  "references": []
+}
