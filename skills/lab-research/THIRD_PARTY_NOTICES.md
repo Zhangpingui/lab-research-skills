@@ -11,7 +11,7 @@
 | [BESSER-PEARL research-agent-skills](https://github.com/BESSER-PEARL/research-agent-skills/tree/03d3c49ac1698c9d29cc4c0f5e8eeca17210bd51) | `research-paper-review/SKILL.md` | 改编按论文类型调整评价标准、核对数值与提出可执行反馈的流程；增加雷达/SAR 口径，取消固定十条建议与接收/拒稿结论 |
 | [nature-skills](https://github.com/Yuan1z0825/nature-skills/tree/f437a86da68e77126a7e0bd0488bf2ea11ac13fb) | `skills/nature-academic-search/SKILL.md` 及检索策略；`skills/nature-writing/SKILL.md` 及论证结构参考 | 改编来源分层、查询矩阵、去重和证据优先写作；重写为雷达/SAR、国自然与科研材料场景，不绑定其 MCP 服务或复制其脚本 |
 
-`scripts/read_pdf.py`、`scripts/build_research_docx.py` 和测试是本项目新写的实现，未复制上述项目代码。其运行依赖 pdfplumber 和 python-docx，二者按自身许可单独分发；本技能包不捆绑这些库。
+`scripts/read_pdf.py`、`scripts/build_research_docx.py`、`scripts/build_paper_notes_docx.py` 和测试是本项目新写的实现，未复制上述项目代码。其运行依赖 pdfplumber、python-docx 和 Pillow，三者按自身许可单独分发；本技能包不捆绑这些库。
 
 research-hound、Docling、MATLAB toolkit 等出现在调研文档中；本项目未复制其文件，也未将其设为运行依赖。
 

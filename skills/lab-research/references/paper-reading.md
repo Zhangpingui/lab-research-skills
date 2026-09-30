@@ -28,13 +28,15 @@
 
 将批评分为：已定位的错误、影响结论的证据缺口、值得尝试的改进。不要把“论文没有说明”改写成“作者没有做”。
 
-## 默认产物
+## 对话问答与正式产物
 
-按需组织为：核心意思、方法解释、关键图表/公式、证据与边界、与本组研究的联系、问题与来源。简读可以很短；精读才展开全部内容。
+只解释一个公式、段落、图表或事实且用户没有要求文件时，直接在对话中回答，不为局部问答机械创建文档。用户要求解读、精读、系统梳理整篇论文或形成可保存报告时，进入正式产物模式。
+
+正式内容按需组织为：核心意思、方法解释、关键图表/公式、证据与边界、与本组研究的联系、问题与来源。简读可以较短；精读才展开全部内容。
 
 数字记录指标名、比较对象和实验条件。重点核对：相对提升与百分点、文字与表格是否一致、训练/推理口径、参数量和硬件条件。
 
-必须用 `paper-notes.md` 保存完整正文，并将其作为论文解读的主笔记保留。用户要求 Word、PDF 或其他格式时，在该 Markdown 笔记基础上额外交付，不得用附加格式替代或删除 `paper-notes.md`；只有用户明确要求“仅输出某种格式”时才可省略 Markdown。
+正式模式必须先用 `paper-notes.md` 保存完整正文，再从该文件生成 `paper-notes.docx`。不得分别起草两份内容，也不得让 Word 反向成为事实源；修改正文后重新生成 Word。只有用户明确要求单一格式时才可省略另一份。
 
 关键主张的证据条目放在 `paper-notes.md` 文末，或在较大任务中单独保存为 `evidence.jsonl`。全文翻译不是本模式默认输出。
 
@@ -45,6 +47,8 @@
 ```text
 outputs/lab-research/<任务名>/
 ├── paper-notes.md
+├── paper-notes.docx
+├── paper-notes.qa.json
 └── paper-notes-assets/
     ├── fig-<编号>-page-<物理页码>.png
     └── table-<编号>-page-<物理页码>.png
@@ -66,6 +70,17 @@ python scripts/extract_pdf_region.py paper.pdf \
 ```
 
 脚本会输出源文件指纹、物理页码、裁剪框、DPI 和图片尺寸。裁剪坐标只是复现记录，不能替代对原始完整页面和最终裁剪图的人工核对。
+
+完成 Markdown 后，用同目录中的相对图片生成 Word：
+
+```bash
+python scripts/build_paper_notes_docx.py \
+  outputs/lab-research/<任务名>/paper-notes.md \
+  outputs/lab-research/<任务名>/paper-notes.docx \
+  --report outputs/lab-research/<任务名>/paper-notes.qa.json
+```
+
+转换器支持标题、正文、列表、Markdown 表格、代码块和本地图片。图片路径必须相对 `paper-notes.md`，且不能逃出任务目录；引用图片缺失时停止生成，避免 Word 悄悄遗漏关键证据。生成 DOCX 后按 [Word 交付](word-delivery.md) 渲染全部页面并核对图片、图注和分页。
 
 数据表按以下规则处理：
 
