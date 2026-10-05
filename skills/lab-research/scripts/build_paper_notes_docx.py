@@ -27,6 +27,16 @@ TABLE_SEPARATOR_CELL_RE = re.compile(r"^:?-{3,}:?$")
 INLINE_RE = re.compile(
     r"(`[^`]+`|\*\*[^*]+\*\*|(?<!\*)\*[^*]+\*(?!\*)|\[[^\]]+\]\([^)]+\))"
 )
+COMPANION_SECTION_HEADINGS = {
+    "最小实验计划",
+    "本次 skill 全流程测试结果",
+    "skill 测试结果",
+    "agent 分工",
+    "参考文献与检索入口",
+    "构建与视觉 qa",
+    "运行清单",
+    "边界说明",
+}
 
 
 def sha256(path: Path) -> str:
@@ -91,6 +101,24 @@ def _plain_inline_text(value: str) -> str:
     value = value.replace("**", "").replace("`", "")
     value = re.sub(r"(?<!\*)\*([^*]+)\*(?!\*)", r"\1", value)
     return value
+
+
+def _normalized_heading_label(value: str) -> str:
+    text = _plain_inline_text(value).strip()
+    text = re.sub(r"^\d+(?:\.\d+)*[.)、．:：-]?\s*", "", text)
+    return re.sub(r"\s+", " ", text).casefold()
+
+
+def _find_companion_sections(lines: list[str]) -> list[str]:
+    headings: list[str] = []
+    for line in lines:
+        match = HEADING_RE.match(line)
+        if not match:
+            continue
+        heading = _plain_inline_text(match.group(2)).strip()
+        if _normalized_heading_label(heading) in COMPANION_SECTION_HEADINGS:
+            headings.append(heading)
+    return headings
 
 
 def _add_inline_runs(paragraph, text: str, *, size: float = 11) -> None:
@@ -251,6 +279,7 @@ def build_document(
     *,
     max_image_width_cm: float = 15.5,
     overwrite: bool = False,
+    allow_companion_sections: bool = False,
 ) -> dict[str, object]:
     markdown_path = markdown_path.resolve()
     if not markdown_path.is_file():
@@ -265,6 +294,14 @@ def build_document(
         raise ValueError("max image width must be between 5 and 17 cm")
 
     lines = markdown_path.read_text(encoding="utf-8").replace("\r\n", "\n").split("\n")
+    companion_sections = _find_companion_sections(lines)
+    if companion_sections and not allow_companion_sections:
+        joined = ", ".join(companion_sections)
+        raise ValueError(
+            "reader-facing paper notes contain companion sections that belong in sidecar "
+            f"artifacts: {joined}. Use --allow-companion-sections only when the user "
+            "explicitly requests them in the Word report."
+        )
     document = Document()
     _configure_document(document)
     first_h1 = True
@@ -397,6 +434,7 @@ def build_document(
         "headings": heading_count,
         "tables": table_count,
         "figures": figure_count,
+        "companion_sections_included": companion_sections,
         "visual_qa": "not_run",
     }
 
@@ -408,6 +446,11 @@ def main() -> int:
     parser.add_argument("--report", type=Path, help="optional JSON build report")
     parser.add_argument("--max-image-width-cm", type=float, default=15.5)
     parser.add_argument("--overwrite", action="store_true")
+    parser.add_argument(
+        "--allow-companion-sections",
+        action="store_true",
+        help="include experiment-plan, search-log, QA, or boundary sections only when explicitly requested",
+    )
     args = parser.parse_args()
     try:
         if args.report and args.report.exists() and not args.overwrite:
@@ -417,6 +460,7 @@ def main() -> int:
             args.output,
             max_image_width_cm=args.max_image_width_cm,
             overwrite=args.overwrite,
+            allow_companion_sections=args.allow_companion_sections,
         )
         if args.report:
             args.report.parent.mkdir(parents=True, exist_ok=True)

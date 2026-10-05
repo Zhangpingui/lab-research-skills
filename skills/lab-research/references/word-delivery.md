@@ -13,6 +13,8 @@ python scripts/build_paper_notes_docx.py paper-notes.md paper-notes.docx \
 
 Word 必须从 Markdown 派生，不另写一份相似但不一致的正文。转换器会嵌入 Markdown 引用的本地图片，并在图片缺失、使用远程 URL 或路径逃出任务目录时失败。每次修改 Markdown 或图表后重新构建并重新渲染 Word。
 
+转换器还会默认拒绝把最小实验计划、Skill 测试结果、Agent 分工、参考文献与检索入口、构建/QA、运行清单或笼统边界说明作为主报告章节。把这些内容放在对应的配套文件中；只有用户明确要求合并进 Word 时才使用 `--allow-companion-sections`。
+
 ## 生成路径
 
 1. 将通过证据审查的正文整理为 `lab-research-document-v1` JSON；示例见 `assets/material-package.example.json`。

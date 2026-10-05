@@ -114,6 +114,56 @@ class PaperNotesDocxTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 MODULE.build_document(notes, root / "notes.docx")
 
+    def test_companion_sections_are_rejected_by_default(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            notes = root / "paper-notes.md"
+            notes.write_text(
+                """# DenoDet 论文解读
+
+## 8. 最小实验计划
+
+这里是应当放入 experiment-matrix.md 的内容。
+
+## 9. 本次 Skill 全流程测试结果
+
+这里是应当放入 run-manifest.json 的内容。
+
+## 10. 参考文献与检索入口
+
+这里是应当放入 references.json 的内容。
+
+## 11. 边界说明
+
+这里是笼统的流程免责声明。
+""",
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "companion sections"):
+                MODULE.build_document(notes, root / "paper-notes.docx")
+
+    def test_companion_sections_need_explicit_override(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            notes = root / "paper-notes.md"
+            notes.write_text(
+                """# DenoDet 论文解读
+
+## 8. 最小实验计划
+
+用户明确要求把实验计划放进 Word。
+""",
+                encoding="utf-8",
+            )
+            output = root / "paper-notes.docx"
+            report = MODULE.build_document(
+                notes,
+                output,
+                allow_companion_sections=True,
+            )
+            self.assertEqual(report["companion_sections_included"], ["8. 最小实验计划"])
+            self.assertTrue(output.is_file())
+
 
 if __name__ == "__main__":
     unittest.main()
